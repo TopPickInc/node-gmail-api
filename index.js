@@ -77,7 +77,6 @@ var retrieve = function (key, q, endpoint, opts) {
 
     if (page) reqOpts.qs.pageToken = page
     request(reqOpts, function (err, response, body) {
-      console.log(body)
       if (err) {
         return result.emit('error', err)
       }
@@ -97,8 +96,6 @@ var retrieve = function (key, q, endpoint, opts) {
           body: 'GET ' + api + '/gmail/v1/users/me/' + endpoint + '/' + m.id + query + '\n'
         }
       })
-
-      messages.length = i < 100 ? i : 100
 
       var r = request({
         method: 'POST',
