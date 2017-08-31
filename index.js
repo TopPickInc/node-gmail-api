@@ -65,7 +65,8 @@ var retrieve = function (key, q, endpoint, opts) {
       json: true,
       timeout: opts.timeout,
       qs: {
-        q: q
+        q: q,
+        maxResults: opts.max
       },
       headers: {
         'Authorization': 'Bearer ' + key
@@ -76,6 +77,7 @@ var retrieve = function (key, q, endpoint, opts) {
 
     if (page) reqOpts.qs.pageToken = page
     request(reqOpts, function (err, response, body) {
+      console.log(body)
       if (err) {
         return result.emit('error', err)
       }
