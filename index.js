@@ -75,7 +75,9 @@ var retrieve = function (key, q, endpoint, opts) {
       }
     }
 
-    console.log('maxResults:', opts.max)
+    if (typeof opts.max === 'undefined') {
+      reqOpts.qs.maxResults = q.split('OR').length
+    }
 
     var query = formQuery({fields : opts.fields, format : opts.format})
 
