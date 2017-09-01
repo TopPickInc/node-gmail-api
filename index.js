@@ -104,12 +104,6 @@ var retrieve = function (key, q, endpoint, opts) {
         }
       })
 
-      console.log('query length:', q.split('OR').length)
-      console.log('query:', q)
-      console.log('messages batch count:', messages.length)
-      console.log('message/query ratio:', messages.length/q.split('OR').length)
-      console.log('messages batch:', messages)
-
       var r = request({
         method: 'POST',
         url: api + '/batch',
