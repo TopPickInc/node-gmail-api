@@ -75,6 +75,8 @@ var retrieve = function (key, q, endpoint, opts) {
       }
     }
 
+    console.log('maxResults:', opts.max)
+
     var query = formQuery({fields : opts.fields, format : opts.format})
 
     if (page) reqOpts.qs.pageToken = page
