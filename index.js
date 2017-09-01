@@ -59,9 +59,12 @@ var retrieve = function (key, q, endpoint, opts) {
     , i = opts.max
     , partsFound = 0
 
+  const url = `${api}/gmail/v1/users/me/${endpoint}`
+  console.log('message list:', url)
+
   var loop = function(page) {
     var reqOpts = {
-      url: api + '/gmail/v1/users/me/' + endpoint,
+      url,
       json: true,
       timeout: opts.timeout,
       qs: {
@@ -96,6 +99,8 @@ var retrieve = function (key, q, endpoint, opts) {
           body: 'GET ' + api + '/gmail/v1/users/me/' + endpoint + '/' + m.id + query + '\n'
         }
       })
+
+      console.log('messages batch:', messages)
 
       var r = request({
         method: 'POST',
