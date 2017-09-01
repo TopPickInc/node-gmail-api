@@ -60,7 +60,6 @@ var retrieve = function (key, q, endpoint, opts) {
     , partsFound = 0
 
   const url = `${api}/gmail/v1/users/me/${endpoint}`
-  console.log('message list:', url)
 
   var loop = function(page) {
     var reqOpts = {
@@ -94,12 +93,14 @@ var retrieve = function (key, q, endpoint, opts) {
         return result.end()
       }
       var messages = body[endpoint].map(function (m) {
+        const body = `GET ${api}/gmail/v1/users/me/${endpoint}/${m.id}`
         return {
           'Content-Type': 'application/http',
-          body: 'GET ' + api + '/gmail/v1/users/me/' + endpoint + '/' + m.id + query + '\n'
+          body
         }
       })
 
+      console.log('messages batch count:', messages.length)
       console.log('messages batch:', messages)
 
       var r = request({
